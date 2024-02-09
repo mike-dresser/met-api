@@ -6,3 +6,9 @@ body {
 img {
   height: 70vh;
 }
+
+#mainArt {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
