@@ -1,8 +1,17 @@
-const base_url =
-  'https://collectionapi.metmuseum.org/public/collection/v1/objects/459123';
+const landingImg = [459121, 459122, 459123, 459125, 459126, 459127]
+
+const base_url =`https://collectionapi.metmuseum.org/public/collection/v1/objects/`;
 
 function initalFetch() {
-  fetch(base_url)
+// landing page Loop of Images
+
+function pullRando(landingImg){
+  let index = Math.floor(Math.random() * landingImg.length)
+  return landingImg[index]
+}
+
+
+  fetch(`${base_url}${pullRando(landingImg)}`)
     .then((res) => res.json())
     .then((artObj) => {
       console.log(artObj);

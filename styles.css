@@ -21,3 +21,9 @@ img {
 #artLabel {
   margin-left: 20px;
 }
+
+#searchBox {
+  height: 30vh;
+  width: 100vw;
+  border: 1px solid black;
+}
