@@ -1,4 +1,15 @@
-const body = document.querySelector('body');
-let greeting = 'Hello, world!';
+const base_url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/459123"
 
-body.append(greeting);
+function initalFetch(){
+    fetch(base_url)
+    .then((res)=> res.json())
+    .then((artObj)=>{
+        let artDiv = document.querySelector("#mainArt")
+       let artImg = document.createElement("img")
+       artImg.src = artObj.primaryImage
+        artDiv.append(artImg)
+        
+    })
+}
+
+initalFetch()
