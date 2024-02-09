@@ -23,6 +23,8 @@ function createLabel(artObj) {
   title.textContent = artObj.title;
   let name = document.createElement('h3');
   name.textContent = artObj.artistDisplayName;
-  artLabel.append(title, name);
+  let artistBio = document.createElement('p');
+  artistBio.textContent = artObj.artistDisplayBio;
+  artLabel.append(title, name, artistBio);
   return artLabel;
 }

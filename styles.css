@@ -3,6 +3,11 @@ body {
   background: peachpuff;
 }
 
+body * {
+  margin: 0;
+  padding: 0;
+}
+
 img {
   height: 70vh;
 }
@@ -11,4 +16,8 @@ img {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+}
+
+#artLabel {
+  margin-left: 20px;
 }
