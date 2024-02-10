@@ -1,6 +1,6 @@
 body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  background: peachpuff;
+  background: rgb(255, 218, 185);
 }
 
 body * {
@@ -10,6 +10,7 @@ body * {
 
 img {
   height: 70vh;
+  padding: 5vh 0;
 }
 
 #mainArt {
@@ -19,11 +20,31 @@ img {
 }
 
 #artLabel {
-  margin-left: 20px;
+  margin-left: 5vh;
+  margin-bottom: 10vh;
 }
 
 #searchBox {
-  height: 30vh;
+  height: 20vh;
   width: 100vw;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  background-color: rgb(255, 231, 209);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+select,
+input {
+  font-size: 18px;
+}
+
+select {
+  width: 200px;
+  height: 40px;
+}
+
+input#keyword {
+  width: 300px;
+  height: 36px;
 }
