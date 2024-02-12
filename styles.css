@@ -19,6 +19,18 @@ img {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+#thumbnailGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+div.thumbnail img {
+  height: 25vh;
 }
 
 #artLabel {
