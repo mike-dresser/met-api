@@ -2,9 +2,9 @@ const base_url = `https://collectionapi.metmuseum.org/public/collection/v1/objec
 const search_url = `https://collectionapi.metmuseum.org/public/collection/v1/search`;
 
 function initialFetch() {
-  // landing page Loop of Images
+  // TODO expand landingImg list of IDs for random button results
   const landingImg = [459121, 459122, 459123, 459125, 459126, 459127];
-  mainArt.innerHTML = ''; // set a VH on random image button
+  mainArt.innerHTML = ''; // TODO set a VH on random image button to set div height
   function pullRando(landingImg) {
     let index = Math.floor(Math.random() * landingImg.length);
     return landingImg[index];
@@ -35,9 +35,9 @@ function createLabel(artObj) {
 }
 
 function createSelectBox(data, valueKey, displayKey, element) {
-  //accepts an array of objects, the keys for value and displacy within
-  //those objects, and a targeted select element, to create and append
-  //select options for each item
+  //accepts an array of objects, the keys for 'value' and 'display' within
+  //those objects (if they are different), and a targeted select element, to create
+  // and append selectbox options for each item
 
   data.forEach((item) => {
     let option = document.createElement('option');
@@ -330,8 +330,10 @@ function searchCollection(event) {
   const department = event.target[0].value;
   const country = event.target[1].value;
   const keyword = event.target[2].value;
-  let searchURL = `${search_url}?q=`
-  searchURL += keyword ? keyword : 'a'; // Search requires some keyword input!
+  //  Search requires some keyword input! We search a common letter to "get something."
+  //  Other search fields can remain empty (replaced by empty string in query).
+  let searchURL = `${search_url}?q=`;
+  searchURL += keyword ? keyword : 'a';
   searchURL += department ? `&departmentId=${department}` : ``;
   searchURL += country ? `&geoLocation=${country}` : ``;
   submitSearch(searchURL);
@@ -345,23 +347,21 @@ searchForm.addEventListener('submit', (event) => {
 });
 
 //submitting search
-function submitSearch(searchURL){
+function submitSearch(searchURL) {
   fetch(searchURL)
-  .then((res) => res.json())
-  .then(resultList =>{
-    let artList = resultList.objectIDs
-    console.log(artList)
-    artList.forEach(artWork => {
-      createThumbnail(artWork) 
-    })
-    console.log(resultList)
-  })
+    .then((res) => res.json())
+    .then((resultList) => {
+      let artList = resultList.objectIDs;
+      console.log(artList);
+      artList.forEach((artWork) => {
+        createThumbnail(artWork);
+      });
+    });
 }
 
-function createThumbnail(artWork){
-  console.log(artWork)
+function createThumbnail(artWork) {
+  console.log(artWork);
 }
-
 
 initialFetch();
 buildSearchForm();
