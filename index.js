@@ -348,8 +348,8 @@ searchForm.addEventListener('submit', (event) => {
 
 //submitting search
 function submitSearch(searchURL) {
-  let clearCont = document.querySelector("#mainArt")
-  clearCont.innerHTML = ""
+  let clearCont = document.querySelector('#mainArt');
+  clearCont.innerHTML = '';
   fetch(searchURL)
     .then((res) => res.json())
     .then((resultList) => {
@@ -363,18 +363,17 @@ function submitSearch(searchURL) {
 
 function createThumbnail(artWork) {
   fetch(base_url + artWork)
-  .then((res) => res.json())
-  .then(artRes => {
-  let container = document.querySelector("#mainArt")
-  let div = document.createElement("div")
-  div.className="thumbnail"
-  let img = document.createElement("img")
-  img.src = artRes.primaryImage
-  console.log(artRes)
-  div.append(img)
-  container.append(div)
-  })
-  
+    .then((res) => res.json())
+    .then((artRes) => {
+      let container = document.querySelector('#thumbnailGrid');
+      let div = document.createElement('div');
+      div.className = 'thumbnail';
+      let img = document.createElement('img');
+      img.src = artRes.primaryImage;
+      console.log(artRes);
+      div.append(img);
+      container.append(div);
+    });
 }
 
 initialFetch();
