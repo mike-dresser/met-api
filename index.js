@@ -330,8 +330,11 @@ function searchCollection(event) {
   const department = event.target[0].value;
   const country = event.target[1].value;
   const keyword = event.target[2].value;
-  const searchURL = `${search_url}?q=${keyword}&departmentId=${department}&geoLocation=${country}`;
-  console.log(searchURL);
+  let searchURL = `${search_url}?q=`
+  searchURL += keyword ? keyword : 'a'; // Search requires some keyword input!
+  searchURL += department ? `&departmentId=${department}` : ``;
+  searchURL += country ? `&geoLocation=${country}` : ``;
+  submitSearch(searchURL);
 }
 
 let randoButton = document.querySelector('#random');
@@ -340,6 +343,25 @@ const searchForm = document.querySelector('#searchForm');
 searchForm.addEventListener('submit', (event) => {
   searchCollection(event);
 });
+
+//submitting search
+function submitSearch(searchURL){
+  fetch(searchURL)
+  .then((res) => res.json())
+  .then(resultList =>{
+    let artList = resultList.objectIDs
+    console.log(artList)
+    artList.forEach(artWork => {
+      createThumbnail(artWork) 
+    })
+    console.log(resultList)
+  })
+}
+
+function createThumbnail(artWork){
+  console.log(artWork)
+}
+
 
 initialFetch();
 buildSearchForm();
