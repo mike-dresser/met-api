@@ -1,8 +1,9 @@
 const base_url = `https://collectionapi.metmuseum.org/public/collection/v1/objects/`;
 
-function initalFetch() {
+function initialFetch() {
   // landing page Loop of Images
   const landingImg = [459121, 459122, 459123, 459125, 459126, 459127];
+  mainArt.innerHTML = "" // set a VH on random image button 
   function pullRando(landingImg) {
     let index = Math.floor(Math.random() * landingImg.length);
     return landingImg[index];
@@ -323,5 +324,8 @@ function buildSearchForm() {
   createSelectBox(countries, 'name', 'name', countryInput);
 }
 
-initalFetch();
+let randoButton = document.querySelector("#random")
+randoButton.addEventListener("click", initialFetch)
+
+initialFetch();
 buildSearchForm();
