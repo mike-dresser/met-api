@@ -1,9 +1,10 @@
 const base_url = `https://collectionapi.metmuseum.org/public/collection/v1/objects/`;
+const search_url = `https://collectionapi.metmuseum.org/public/collection/v1/search`;
 
 function initialFetch() {
   // landing page Loop of Images
   const landingImg = [459121, 459122, 459123, 459125, 459126, 459127];
-  mainArt.innerHTML = "" // set a VH on random image button 
+  mainArt.innerHTML = ''; // set a VH on random image button
   function pullRando(landingImg) {
     let index = Math.floor(Math.random() * landingImg.length);
     return landingImg[index];
@@ -324,8 +325,21 @@ function buildSearchForm() {
   createSelectBox(countries, 'name', 'name', countryInput);
 }
 
-let randoButton = document.querySelector("#random")
-randoButton.addEventListener("click", initialFetch)
+function searchCollection(event) {
+  event.preventDefault();
+  const department = event.target[0].value;
+  const country = event.target[1].value;
+  const keyword = event.target[2].value;
+  const searchURL = `${search_url}?q=${keyword}&departmentId=${department}&geoLocation=${country}`;
+  console.log(searchURL);
+}
+
+let randoButton = document.querySelector('#random');
+randoButton.addEventListener('click', initialFetch);
+const searchForm = document.querySelector('#searchForm');
+searchForm.addEventListener('submit', (event) => {
+  searchCollection(event);
+});
 
 initialFetch();
 buildSearchForm();
