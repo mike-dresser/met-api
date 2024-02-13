@@ -355,12 +355,31 @@ function submitSearch(searchURL) {
   fetch(searchURL)
     .then((res) => res.json())
     .then((resultList) => {
-      let artList = resultList.objectIDs;
-      console.log(artList);
-      artList.forEach((artWork) => {
-        createThumbnail(artWork);
-      });
+      buildGrid(resultList.objectIDs);
     });
+}
+
+function buildGrid(artList) {
+  console.log(artList);
+  if (artList.length < 50) {
+    artList.forEach((artWork) => createThumbnail(artWork));
+  } else {
+    for (let i = 0; i < 50; i++) {
+      createThumbnail(artList[i]);
+    }
+    artList.splice(0, 50);
+    let container = document.querySelector('#thumbnailGrid');
+    let link = document.createElement('a');
+    link.href = '#';
+    link.textContent = 'More...';
+    link.addEventListener('click', () => {
+      link.remove();
+      buildGrid(artList);
+    });
+    setTimeout(() => {
+      container.append(link);
+    }, 5000);
+  }
 }
 
 function createThumbnail(artWork) {
@@ -376,7 +395,7 @@ function createThumbnail(artWork) {
       let img = document.createElement('img');
       img.src = artRes.primaryImage;
       div.append(img);
-      container.append(div);
+      setTimeout(container.append(div), 50); // throttle request speed to 20x per sec
     });
 }
 
