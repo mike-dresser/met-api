@@ -332,10 +332,11 @@ function searchCollection(event) {
   const keyword = event.target[2].value;
   //  Search requires some keyword input! We search a common letter to "get something."
   //  Other search fields can remain empty (replaced by empty string in query).
-  let searchURL = `${search_url}?q=`;
-  searchURL += keyword ? keyword : 'a';
-  searchURL += department ? `&departmentId=${department}` : ``;
+  let searchURL = `${search_url}?`;
+  searchURL += department ? `departmentId=${department}` : ``;
   searchURL += country ? `&geoLocation=${country}` : ``;
+  searchURL += '&hasImages=true&q=';
+  searchURL += keyword ? keyword : '';
   submitSearch(searchURL);
 }
 
@@ -348,8 +349,9 @@ searchForm.addEventListener('submit', (event) => {
 
 //submitting search
 function submitSearch(searchURL) {
-  let clearCont = document.querySelector('#mainArt');
+  const clearCont = document.querySelector('#thumbnailGrid');
   clearCont.innerHTML = '';
+  console.log(searchURL);
   fetch(searchURL)
     .then((res) => res.json())
     .then((resultList) => {
@@ -373,7 +375,7 @@ function createThumbnail(artWork) {
       div.className = 'thumbnail';
       let img = document.createElement('img');
       img.src = artRes.primaryImage;
-      console.log(artRes);
+      // console.log(artRes);
       div.append(img);
       container.append(div);
     });

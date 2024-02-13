@@ -10,7 +10,7 @@ body * {
   padding: 0;
 }
 
-img {
+#mainArt img {
   height: 70vh;
   padding: 5vh 0;
 }
@@ -24,7 +24,7 @@ img {
 }
 
 #thumbnailGrid {
-  /* Display none removed by JS after search */
+  /* display: none toggled to flex by JS after search */
   display: none;
   min-height: 80vh;
   flex-wrap: wrap;
