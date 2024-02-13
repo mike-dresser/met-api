@@ -375,7 +375,6 @@ function createThumbnail(artWork) {
       div.className = 'thumbnail';
       let img = document.createElement('img');
       img.src = artRes.primaryImage;
-      // console.log(artRes);
       div.append(img);
       container.append(div);
     });
