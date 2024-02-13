@@ -383,7 +383,7 @@ function createThumbnail(artWork) {
       let img = document.createElement('img');
       img.src = artRes.primaryImage;
       div.append(img);
-      setTimeout(container.append(div), 50); // throttle request speed to 20x per sec
+      container.append(div);
     });
 }
 
