@@ -2,9 +2,25 @@ const base_url = `https://collectionapi.metmuseum.org/public/collection/v1/objec
 const search_url = `https://collectionapi.metmuseum.org/public/collection/v1/search`;
 
 function initialFetch() {
-  // TODO expand landingImg list of IDs for random button results
-  const landingImg = [459121, 459122, 459123, 459125, 459126, 459127];
-  mainArt.innerHTML = ''; // TODO set a VH on random image button to set div height
+  // Previous set -- [459121, 459122, 459123, 459125, 459126, 459127];
+  // Current landing images are highlights from the European Painting dept
+  const landingImg = [
+    437372, 437749, 437879, 436966, 437869, 437394, 436545, 436253, 437769,
+    437326, 437790, 437423, 435728, 435853, 436516, 437127, 437891, 435868,
+    437675, 438112, 435888, 435984, 436792, 435802, 438818, 436095, 436504,
+    437926, 436173, 436947, 437430, 436101, 437658, 438822, 436121, 437455,
+    437487, 436002, 437329, 437826, 435896, 436658, 437971, 436839, 436896,
+    436532, 436892, 437490, 437609, 437160, 634108, 435641, 749639, 438817,
+    437133, 435882, 438814, 435876, 827660, 436603, 440393, 436282, 437835,
+    679844, 435739, 436819, 437175, 436838, 436528, 437854, 435621, 435851,
+    436944, 435809, 435600, 435844, 437900, 436575, 436573, 435702, 436440,
+    436579, 438417, 437447, 437097, 436323, 436851, 438821, 435817, 437654,
+    438816, 436105, 435908, 437283, 437153, 436037, 437131, 437056, 437344,
+    436964, 437881, 436535, 435826, 437299, 438820, 437053, 438815, 437549,
+    436918, 435962, 436622, 436840, 437532, 439933, 436106, 815112, 437397,
+    435839, 437261, 441769, 438605, 440723, 626692, 438754, 436244,
+  ];
+  mainArt.innerHTML = '';
   function pullRando(landingImg) {
     let index = Math.floor(Math.random() * landingImg.length);
     return landingImg[index];
