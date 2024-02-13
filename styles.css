@@ -35,8 +35,13 @@ div.frame {
   font-size: 5vh;
   position: absolute;
   cursor: pointer;
+  display: none;
+  /* display toggled with div.frame: hover > span */
 }
 
+div.frame:hover > span {
+  display: block;
+}
 .likeBtn {
   bottom: 2vh;
   right: 3vh;
@@ -45,10 +50,6 @@ div.frame {
 .closeBtn {
   top: 2vh;
   right: 3vh;
-}
-
-.hidden {
-  display: none;
 }
 
 #thumbnailGrid {

@@ -50,11 +50,15 @@ function initialFetch() {
 function makeLikable(container) {
   let heart = document.createElement('span');
   heart.textContent = '♥︎';
-  heart.className = 'likeBtn';
+  heart.classList.add('likeBtn');
   let x = document.createElement('span');
   x.textContent = `⨉`;
-  x.className = 'closeBtn';
+  x.classList.add('closeBtn');
   container.append(x, heart);
+  // container.addEventListener('mouseover', () => {
+  //   heart.classList.toggle('hidden');
+  //   x.classList.toggle('hidden');
+  // });
 }
 
 function createLabel(artObj) {
