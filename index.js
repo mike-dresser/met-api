@@ -280,6 +280,12 @@ function buildSearchForm() {
   const countryInput = document.querySelector('#countryInput');
   createSelectBox(departments, 'departmentId', 'displayName', departmentInput);
   createSelectBox(countries, 'name', 'name', countryInput);
+  let randoButton = document.querySelector('#random');
+  randoButton.addEventListener('click', initialFetch);
+  const searchForm = document.querySelector('#searchForm');
+  searchForm.addEventListener('submit', (event) => {
+    searchCollection(event);
+  });
 }
 
 function searchCollection(event) {
@@ -296,13 +302,6 @@ function searchCollection(event) {
   searchURL += keyword ? keyword : 'a';
   submitSearch(searchURL);
 }
-
-let randoButton = document.querySelector('#random');
-randoButton.addEventListener('click', initialFetch);
-const searchForm = document.querySelector('#searchForm');
-searchForm.addEventListener('submit', (event) => {
-  searchCollection(event);
-});
 
 //submitting search
 function submitSearch(searchURL) {
