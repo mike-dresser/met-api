@@ -378,12 +378,15 @@ function createThumbnail(artWork) {
   fetch(base_url + artWork)
     .then((res) => res.json())
     .then((artRes) => {
-      let div = document.createElement('div');
-      div.className = 'thumbnail';
-      let img = document.createElement('img');
-      img.src = artRes.primaryImage;
-      div.append(img);
-      container.append(div);
+      // let div = document.createElement('div');
+      // div.className = 'thumbnail';
+      // let img = document.createElement('img');
+      // img.src = artRes.primaryImage;
+      // div.append(img);
+      // container.append(div);
+      let thumbnail = frame(artRes);
+      thumbnail.classList.add('thumbnail');
+      container.append(thumbnail);
     });
 }
 
