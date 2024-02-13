@@ -12,7 +12,6 @@ body * {
 
 #mainArt img {
   height: 70vh;
-  padding: 5vh 0;
 }
 
 #mainArt {
@@ -21,6 +20,11 @@ body * {
   align-items: flex-end;
   flex-wrap: wrap;
   min-height: 80vh;
+  padding-top: 5vh;
+}
+
+div.frame {
+  align-self: start;
 }
 
 #thumbnailGrid {

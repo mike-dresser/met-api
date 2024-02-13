@@ -36,9 +36,12 @@ function initialFetch() {
   fetch(`${base_url}${pullRando(landingImg)}`)
     .then((res) => res.json())
     .then((artObj) => {
+      let artFrame = document.createElement('div');
+      artFrame.className = 'frame';
       let artImg = document.createElement('img');
       artImg.src = artObj.primaryImage;
-      artDiv.append(artImg);
+      artFrame.append(artImg);
+      artDiv.append(artFrame);
       artDiv.append(createLabel(artObj));
     });
 }
@@ -324,6 +327,7 @@ function submitSearch(searchURL) {
 }
 
 function buildGrid(artList) {
+  // Display up to 50 results, with a link to append the next 50, etc
   console.log(artList);
   if (artList.length < 50) {
     artList.forEach((artWork) => createThumbnail(artWork));
@@ -342,7 +346,7 @@ function buildGrid(artList) {
     });
     setTimeout(() => {
       container.append(link);
-    }, 5000); // wait to append link to ensure it is at the end of results
+    }, 4000); // wait to append link to ensure it is at the end of results
   }
 }
 
