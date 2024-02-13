@@ -76,7 +76,6 @@ input#keyword {
   height: 36px;
 }
 
-
 /* Modal Styles */
 .modal {
   display: none; /* Hidden by default */
@@ -115,9 +114,8 @@ input#keyword {
 }
 
 /* Modal Image */
-#modal-image {
-  max-width: 100%;
-  height: auto;
+.modal-content img {
+  width: 100%;
   display: block;
   margin: 0 auto;
 }
