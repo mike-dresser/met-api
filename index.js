@@ -42,8 +42,19 @@ function initialFetch() {
       artImg.src = artObj.primaryImage;
       artFrame.append(artImg);
       artDiv.append(artFrame);
+      makeLikable(artFrame);
       artDiv.append(createLabel(artObj));
     });
+}
+
+function makeLikable(container) {
+  let heart = document.createElement('span');
+  heart.textContent = '♥︎';
+  heart.className = 'likeBtn';
+  let x = document.createElement('span');
+  x.textContent = `⨉`;
+  x.className = 'closeBtn';
+  container.append(x, heart);
 }
 
 function createLabel(artObj) {

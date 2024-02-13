@@ -25,6 +25,30 @@ body * {
 
 div.frame {
   align-self: start;
+  position: relative;
+}
+
+.likeBtn,
+.closeBtn {
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 5vh;
+  position: absolute;
+  cursor: pointer;
+}
+
+.likeBtn {
+  bottom: 2vh;
+  right: 3vh;
+}
+
+.closeBtn {
+  top: 2vh;
+  right: 3vh;
+}
+
+.hidden {
+  display: none;
 }
 
 #thumbnailGrid {
