@@ -36,20 +36,26 @@ function initialFetch() {
   fetch(`${base_url}${pullRando(landingImg)}`)
     .then((res) => res.json())
     .then((artObj) => {
-      let artFrame = document.createElement('div');
-      artFrame.className = 'frame';
-      let artImg = document.createElement('img');
-      artImg.src = artObj.primaryImage;
-      artFrame.append(artImg);
-      artDiv.append(artFrame);
-      makeLikable(artFrame);
+      artDiv.append(frame(artObj));
       artDiv.append(createLabel(artObj));
     });
 }
 
+function frame(artObj) {
+  // from object record, return a div containing an image
+  // with like and X buttons on hover
+  let artFrame = document.createElement('div');
+  artFrame.className = 'frame';
+  let artImg = document.createElement('img');
+  artImg.src = artObj.primaryImage;
+  artFrame.append(artImg);
+  makeLikable(artFrame);
+  return artFrame;
+}
+
 function makeLikable(container) {
   // add like and close button to appear over container
-  // contents on hover
+  // div contents on hover
   let heart = document.createElement('span');
   heart.textContent = '♥︎';
   heart.classList.add('likeBtn');
