@@ -138,11 +138,9 @@ function buildSearchForm() {
     { name: 'Estonia', code: 'EE' },
     { name: 'Ethiopia', code: 'ET' },
     { name: 'Falkland Islands', code: 'FK' },
-    { name: 'Faroe Islands', code: 'FO' },
     { name: 'Fiji', code: 'FJ' },
     { name: 'Finland', code: 'FI' },
     { name: 'France', code: 'FR' },
-    { name: 'French Guiana', code: 'GF' },
     { name: 'French Polynesia', code: 'PF' },
     { name: 'Gabon', code: 'GA' },
     { name: 'Gambia', code: 'GM' },
@@ -292,10 +290,10 @@ function searchCollection(event) {
   //  Search requires some keyword input! We search a common letter to "get something."
   //  Other search fields can remain empty (replaced by empty string in query).
   let searchURL = `${search_url}?`;
-  searchURL += department ? `departmentId=${department}` : ``;
-  searchURL += country ? `&geoLocation=${country}` : ``;
-  searchURL += '&hasImages=true&q=';
-  searchURL += keyword ? keyword : '';
+  searchURL += department ? `departmentId=${department}&` : ``;
+  searchURL += country ? `geoLocation=${country}&` : ``;
+  searchURL += 'hasImages=true&q=';
+  searchURL += keyword ? keyword : 'a';
   submitSearch(searchURL);
 }
 
