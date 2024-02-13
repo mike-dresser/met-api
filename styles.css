@@ -26,10 +26,20 @@ body * {
 #thumbnailGrid {
   /* display: none toggled to flex by JS after search */
   display: none;
-  min-height: 80vh;
+  height: 80vh;
   flex-wrap: wrap;
+  overflow: auto;
   gap: 20px;
   justify-content: center;
+  align-items: flex-end;
+}
+
+#thumbnailGrid a {
+  font-size: 18px;
+  font-style: italic;
+  color: black;
+  margin-bottom: 3vh;
+  text-decoration: none;
 }
 
 div.thumbnail img {

@@ -359,7 +359,7 @@ function submitSearch(searchURL) {
     });
 }
 
-function buildGrid(artList, nextIndex = 0) {
+function buildGrid(artList) {
   console.log(artList);
   if (artList.length < 50) {
     artList.forEach((artWork) => createThumbnail(artWork));
@@ -367,6 +367,18 @@ function buildGrid(artList, nextIndex = 0) {
     for (let i = 0; i < 50; i++) {
       createThumbnail(artList[i]);
     }
+    artList.splice(0, 50);
+    let container = document.querySelector('#thumbnailGrid');
+    let link = document.createElement('a');
+    link.href = '#';
+    link.textContent = 'More...';
+    link.addEventListener('click', () => {
+      link.remove();
+      buildGrid(artList);
+    });
+    setTimeout(() => {
+      container.append(link);
+    }, 5000);
   }
 }
 
