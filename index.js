@@ -363,5 +363,39 @@ function createThumbnail(artWork) {
     });
 }
 
+
+function openModal(artObj){
+  const modal = document.querySelector('.modal')
+  const modalContent = document.querySelector(".modal-content")
+
+  modalContent.innerHTML= ""
+  const modalImg = document.createElement('img')
+
+  modalImg.src = artObj.primaryImage; 
+  modalImg.alt = artObj.title; 
+  modalImg.addEventListener('click', () => closeModal()); // Close modal on click on the enlarged image
+  console.log(modal)
+  modalContent.appendChild(modalImg);
+  modalContent.appendChild(createLabel(artObj)); //  createLabel to add additional details
+
+  // Displaying the Modal
+  modal.style.display = 'block';
+}
+
+function closeModal() {
+  const modal = document.querySelector('.modal');
+  modal.style.display = 'none';
+}
+
+// Close modal when clicking on the close button or outside the modal
+window.addEventListener('click', (event) => {
+  const modal = document.querySelector('.modal');
+  if (event.target == modal) {
+    closeModal();
+  }
+});
+
+
+
 initialFetch();
 buildSearchForm();
