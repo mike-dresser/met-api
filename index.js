@@ -48,6 +48,8 @@ function initialFetch() {
 }
 
 function makeLikable(container) {
+  // add like and close button to appear over container
+  // contents on hover
   let heart = document.createElement('span');
   heart.textContent = '♥︎';
   heart.classList.add('likeBtn');
@@ -55,10 +57,6 @@ function makeLikable(container) {
   x.textContent = `⨉`;
   x.classList.add('closeBtn');
   container.append(x, heart);
-  // container.addEventListener('mouseover', () => {
-  //   heart.classList.toggle('hidden');
-  //   x.classList.toggle('hidden');
-  // });
 }
 
 function createLabel(artObj) {
