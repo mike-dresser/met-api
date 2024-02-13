@@ -20,13 +20,14 @@ function initialFetch() {
     437532, 439933, 436106, 815112, 437397, 435839, 437261, 441769, 438605,
     440723, 626692, 438754, 436244,
   ];
-  // Clear contents if previous reloading random image
+  // Clear contents if reloading random image
   let artDiv = document.querySelector('#mainArt');
   artDiv.innerHTML = '';
   // Clear contents if coming from search results
   const clearCont = document.querySelector('#thumbnailGrid');
   clearCont.style.display = 'none';
   artDiv.style.display = 'flex';
+
   function pullRando(landingImg) {
     let index = Math.floor(Math.random() * landingImg.length);
     return landingImg[index];
@@ -56,7 +57,7 @@ function createLabel(artObj) {
 }
 
 function createSelectBox(data, valueKey, displayKey, element) {
-  //accepts an array of objects, the keys for 'value' and 'display' within
+  //accepts an array of objects, the key names for 'value' and 'display' within
   //those objects (if they are different), and a targeted select element, to create
   // and append selectbox options for each item
 
@@ -285,8 +286,10 @@ function buildSearchForm() {
   const countryInput = document.querySelector('#countryInput');
   createSelectBox(departments, 'departmentId', 'displayName', departmentInput);
   createSelectBox(countries, 'name', 'name', countryInput);
+
   let randoButton = document.querySelector('#random');
   randoButton.addEventListener('click', initialFetch);
+
   const searchForm = document.querySelector('#searchForm');
   searchForm.addEventListener('submit', (event) => {
     searchCollection(event);
@@ -298,8 +301,8 @@ function searchCollection(event) {
   const department = event.target[0].value;
   const country = event.target[1].value;
   const keyword = event.target[2].value;
-  //  Search requires some keyword input! We search a common letter to "get something."
-  //  Other search fields can remain empty (replaced by empty string in query).
+  //  Search requires some keyword input! We search a common letter to "get something"
+  //  if left blank. Other search fields added to query if they have content.
   let searchURL = `${search_url}?`;
   searchURL += department ? `departmentId=${department}&` : ``;
   searchURL += country ? `geoLocation=${country}&` : ``;
@@ -311,7 +314,7 @@ function searchCollection(event) {
 //submitting search
 function submitSearch(searchURL) {
   const clearCont = document.querySelector('#thumbnailGrid');
-  clearCont.innerHTML = '';
+  clearCont.innerHTML = ''; // clear previous results on new submission
   console.log(searchURL);
   fetch(searchURL)
     .then((res) => res.json())
@@ -328,7 +331,7 @@ function buildGrid(artList) {
     for (let i = 0; i < 50; i++) {
       createThumbnail(artList[i]);
     }
-    artList.splice(0, 50);
+    artList.splice(0, 50); // remaining art IDs will be added to 'More' event listener
     let container = document.querySelector('#thumbnailGrid');
     let link = document.createElement('a');
     link.href = '#';
@@ -339,7 +342,7 @@ function buildGrid(artList) {
     });
     setTimeout(() => {
       container.append(link);
-    }, 5000);
+    }, 5000); // wait to append link to ensure it is at the end of results
   }
 }
 
