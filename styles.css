@@ -20,10 +20,13 @@ img {
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
+  min-height: 80vh;
 }
 
 #thumbnailGrid {
-  display: flex;
+  /* Display none removed by JS after search */
+  display: none;
+  min-height: 80vh;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;

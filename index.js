@@ -362,10 +362,13 @@ function submitSearch(searchURL) {
 }
 
 function createThumbnail(artWork) {
+  const mainArt = document.querySelector('#mainArt');
+  mainArt.style.display = 'none';
+  let container = document.querySelector('#thumbnailGrid');
+  container.style.display = 'flex';
   fetch(base_url + artWork)
     .then((res) => res.json())
     .then((artRes) => {
-      let container = document.querySelector('#thumbnailGrid');
       let div = document.createElement('div');
       div.className = 'thumbnail';
       let img = document.createElement('img');
