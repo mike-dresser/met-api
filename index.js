@@ -346,15 +346,16 @@ function submitSearch(searchURL) {
 }
 
 function buildGrid(artList) {
-  // Display up to 50 results, with a link to append the next 50, etc
+  // Display up to 18 results, with a link to append the next 18, etc
+  // Initially was 50 results, but loading performance was poor
   console.log(artList);
-  if (artList.length < 50) {
+  if (artList.length < 18) {
     artList.forEach((artWork) => createThumbnail(artWork));
   } else {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 18; i++) {
       createThumbnail(artList[i]);
     }
-    artList.splice(0, 50); // remaining art IDs will be added to 'More' event listener
+    artList.splice(0, 18); // remaining art IDs will be added to 'More' event listener
     let container = document.querySelector('#thumbnailGrid');
     let link = document.createElement('a');
     link.href = '#';
