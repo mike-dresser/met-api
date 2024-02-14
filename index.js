@@ -387,6 +387,9 @@ function createThumbnail(artWork) {
       // container.append(div);
       let thumbnail = frame(artRes);
       thumbnail.classList.add('thumbnail');
+      thumbnail.addEventListener('click', () => {
+        openModal(artRes);
+      });
       container.append(thumbnail);
     });
 }
