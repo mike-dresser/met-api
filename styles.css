@@ -1,5 +1,5 @@
 body {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Source Serif 4', sans-serif;
   background: rgb(255, 218, 185);
   margin: 0;
   padding: 0;
@@ -8,6 +8,15 @@ body {
 body * {
   margin: 0;
   padding: 0;
+}
+
+h2,
+h3 {
+  font-weight: 500;
+}
+
+h2 {
+  font-style: italic;
 }
 
 #mainArt img {
@@ -69,7 +78,7 @@ div.frame:hover > span {
 }
 
 #gallery {
-  border: 3px solid black;
+  border: 4px solid rgb(255, 231, 209);
   border-radius: 10px;
   margin: 5vh;
   display: none; /* toggle on in JS */
@@ -104,11 +113,23 @@ div.thumbnail img {
 select,
 input {
   font-size: 18px;
+  border-radius: 5px;
+  margin: 0 0.5vw;
 }
 
 select {
   width: 200px;
   height: 40px;
+}
+
+input[type='button'],
+input[type='submit'] {
+  border-style: none;
+  background-color: rgb(249, 208, 168);
+  height: 38px;
+  padding: 0px 10px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 input#keyword {
