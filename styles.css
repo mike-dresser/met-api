@@ -105,6 +105,13 @@ input#keyword {
   height: 36px;
 }
 
+#gallery {
+  border: 3px solid black;
+  border-radius: 10px;
+  margin: 15px;
+  display: none; /* toggle on in JS */
+}
+
 /* Modal Styles */
 .modal {
   display: none; /* Hidden by default */
