@@ -58,11 +58,12 @@ function frame(artObj) {
   artImg.src = artObj.primaryImage;
   artFrame.append(artImg);
   makeLikable(artFrame, artObj.objectID);
+  makeCloseable(artFrame, artObj.objectID);
   return artFrame;
 }
 
 function makeLikable(container, objectId) {
-  // add like and close button to appear over container
+  // add like button to appear over container
   // div contents on hover
   let heart = document.createElement('span');
   heart.textContent = '♥︎';
@@ -70,11 +71,20 @@ function makeLikable(container, objectId) {
   heart.addEventListener('click', () => {
     addLike(objectId);
   });
-  // let x = document.createElement('span');
-  // x.textContent = `⨉`;
-  // x.classList.add('closeBtn');
-  // container.append(x, heart);
   container.append(heart);
+}
+
+function makeCloseable(container, objectId) {
+  // add close button to appear over container
+  // div contents on hover
+  let x = document.createElement('span');
+  x.textContent = `⨉`;
+  x.classList.add('closeBtn');
+  x.addEventListener('click', () => {
+    removeLike(objectId);
+    container.remove();
+  });
+  container.append(x);
 }
 
 function addLike(objectId) {
@@ -86,6 +96,15 @@ function addLike(objectId) {
   let array = JSON.parse(currentLikes);
   array.push(objectId);
   createThumbnail(objectId, gallery);
+  localStorage.setItem('favorites', JSON.stringify(array));
+}
+
+function removeLike(objectId) {
+  const gallery = document.querySelector('#gallery');
+  let currentLikes = localStorage.getItem('favorites');
+  let array = JSON.parse(currentLikes);
+  let removeIndex = array.indexOf(objectId);
+  array.splice(removeIndex, 1);
   localStorage.setItem('favorites', JSON.stringify(array));
 }
 
