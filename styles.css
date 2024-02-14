@@ -19,7 +19,7 @@ body * {
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
-  min-height: 80vh;
+  min-height: 75vh;
   padding-top: 5vh;
 }
 
@@ -53,7 +53,8 @@ div.frame:hover > span {
 }
 
 #thumbnailGrid {
-  height: 80vh;
+  height: 75vh;
+  padding: 2.5vh;
   display: none;
 }
 
