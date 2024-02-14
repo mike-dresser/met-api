@@ -454,6 +454,7 @@ function createThumbnail(artWork, containerToAppend, hoverBtn) {
   fetch(base_url + artWork)
     .then((res) => res.json())
     .then((artRes) => {
+      if (!artRes.primaryImage) return;
       let thumbnail = frame(artRes, hoverBtn);
       thumbnail.classList.add('thumbnail');
       thumbnail.addEventListener('click', (e) => {
