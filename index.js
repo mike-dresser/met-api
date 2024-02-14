@@ -88,6 +88,18 @@ function makeCloseable(container, objectId) {
   // div contents on hover
   let x = document.createElement('span');
   x.textContent = `⨉`;
+  x.addEventListener(
+    'mouseenter',
+    () => {
+      console.log('mouseover!');
+      x.classList.add('btnFocused');
+
+      x.addEventListener('mouseleave', () => {
+        x.classList.remove('btnFocused');
+      });
+    },
+    true
+  );
   x.classList.add('closeBtn');
   x.addEventListener('click', () => {
     removeLike(objectId);

@@ -41,24 +41,35 @@ div.frame {
 .closeBtn {
   font-weight: 900;
   color: rgba(255, 255, 255, 0.65);
-  font-size: 5vh;
+  font-size: 4vh;
   position: absolute;
   cursor: pointer;
   display: none;
+  height: 0.9em;
+  padding-bottom: 0.1em;
+  width: 1em;
+  justify-content: center;
+  align-items: center;
   /* display toggled with div.frame: hover > span */
 }
 
+.btnFocused {
+  color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+}
+
 div.frame:hover > span {
-  display: block;
+  display: flex;
 }
 .likeBtn {
-  bottom: 2vh;
+  bottom: 3vh;
   right: 3vh;
 }
 
 .closeBtn {
-  top: 2vh;
-  right: 3vh;
+  top: 0.3em;
+  right: 0.4em;
 }
 
 #thumbnailGrid {
