@@ -36,11 +36,34 @@ function initialFetch() {
   fetch(`${base_url}${pullRando(landingImg)}`)
     .then((res) => res.json())
     .then((artObj) => {
-      let artImg = document.createElement('img');
-      artImg.src = artObj.primaryImage;
-      artDiv.append(artImg);
+      artDiv.append(frame(artObj));
       artDiv.append(createLabel(artObj));
     });
+}
+
+function frame(artObj) {
+  // from object record, return a div containing an image
+  // with like and X buttons on hover
+  let artFrame = document.createElement('div');
+  artFrame.className = 'frame';
+  let artImg = document.createElement('img');
+  artImg.src = artObj.primaryImage;
+  artFrame.append(artImg);
+  makeLikable(artFrame);
+  return artFrame;
+}
+
+function makeLikable(container) {
+  // add like and close button to appear over container
+  // div contents on hover
+  let heart = document.createElement('span');
+  heart.textContent = '♥︎';
+  heart.classList.add('likeBtn');
+  // let x = document.createElement('span');
+  // x.textContent = `⨉`;
+  // x.classList.add('closeBtn');
+  // container.append(x, heart);
+  container.append(heart);
 }
 
 function createLabel(artObj) {
@@ -324,6 +347,8 @@ function submitSearch(searchURL) {
 }
 
 function buildGrid(artList) {
+  // Display up to 18 results, with a link to append the next 18, etc
+  // Initially was 50 results, but loading performance was poor
   console.log(artList);
   if (artList.length < 18) {
     artList.forEach((artWork) => createThumbnail(artWork));
@@ -354,15 +379,15 @@ function createThumbnail(artWork) {
   fetch(base_url + artWork)
     .then((res) => res.json())
     .then((artRes) => {
-      let div = document.createElement('div');
-      div.className = 'thumbnail';
-      let img = document.createElement('img');
-      img.src = artRes.primaryImage;
-      div.append(img);
-      div.addEventListener('click', () => {
-        openModal(artRes);
-      });
-      setTimeout(container.append(div), 50); // throttle request speed to 20x per sec
+      // let div = document.createElement('div');
+      // div.className = 'thumbnail';
+      // let img = document.createElement('img');
+      // img.src = artRes.primaryImage;
+      // div.append(img);
+      // container.append(div);
+      let thumbnail = frame(artRes);
+      thumbnail.classList.add('thumbnail');
+      container.append(thumbnail);
     });
 }
 
