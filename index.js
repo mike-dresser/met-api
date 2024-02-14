@@ -59,10 +59,11 @@ function makeLikable(container) {
   let heart = document.createElement('span');
   heart.textContent = '♥︎';
   heart.classList.add('likeBtn');
-  let x = document.createElement('span');
-  x.textContent = `⨉`;
-  x.classList.add('closeBtn');
-  container.append(x, heart);
+  // let x = document.createElement('span');
+  // x.textContent = `⨉`;
+  // x.classList.add('closeBtn');
+  // container.append(x, heart);
+  container.append(heart);
 }
 
 function createLabel(artObj) {
