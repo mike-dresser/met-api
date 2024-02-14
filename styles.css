@@ -54,19 +54,18 @@ div.frame:hover > span {
 
 #thumbnailGrid {
   height: 75vh;
-  padding: 2.5vh;
   display: none;
 }
 
 #gallery,
 #thumbnailGrid {
   /* display: none toggled to flex by JS after search */
-
   flex-wrap: wrap;
   overflow: auto;
   gap: 20px;
   justify-content: center;
   align-items: flex-end;
+  padding: 2.5vh;
 }
 
 #gallery {
