@@ -342,19 +342,19 @@ function submitSearch(searchURL) {
   fetch(searchURL)
     .then((res) => res.json())
     .then((resultList) => {
-      buildGrid(resultList.objectIDs, clearCont);
+      buildGrid(resultList.objectIDs, document.querySelector('#thumbnailGrid'));
     });
 }
 
 function buildGrid(artList, containerToAppend) {
   // Display up to 18 results, with a link to append the next 18, etc
   // Initially was 50 results, but loading performance was poor
-  console.log(artList);
+  // This function called for search result or favorites gallery
   if (artList.length < 18) {
-    artList.forEach((artWork) => createThumbnail(artWork));
+    artList.forEach((artWork) => createThumbnail(artWork, containerToAppend));
   } else {
     for (let i = 0; i < 18; i++) {
-      createThumbnail(artList[i]);
+      createThumbnail(artList[i], containerToAppend);
     }
     artList.splice(0, 18); // remaining art IDs will be added to 'More' event listener
     let link = document.createElement('a');
@@ -362,7 +362,7 @@ function buildGrid(artList, containerToAppend) {
     link.textContent = 'More...';
     link.addEventListener('click', () => {
       link.remove();
-      buildGrid(artList);
+      buildGrid(artList, containerToAppend);
     });
     setTimeout(() => {
       containerToAppend.append(link);
@@ -375,8 +375,8 @@ function createThumbnail(artWork, containerToAppend) {
   const mainArt = document.querySelector('#mainArt');
   mainArt.style.display = 'none';
   //expose thumbnailGrid div
-  let container = document.querySelector('#thumbnailGrid');
-  container.style.display = 'flex';
+  // let container = document.querySelector('#thumbnailGrid');
+  containerToAppend.style.display = 'flex';
 
   fetch(base_url + artWork)
     .then((res) => res.json())
@@ -392,7 +392,7 @@ function createThumbnail(artWork, containerToAppend) {
       thumbnail.addEventListener('click', () => {
         openModal(artRes);
       });
-      container.append(thumbnail);
+      containerToAppend.append(thumbnail);
     });
 }
 
