@@ -454,16 +454,10 @@ function createThumbnail(artWork, containerToAppend, hoverBtn) {
   fetch(base_url + artWork)
     .then((res) => res.json())
     .then((artRes) => {
-      // let div = document.createElement('div');
-      // div.className = 'thumbnail';
-      // let img = document.createElement('img');
-      // img.src = artRes.primaryImage;
-      // div.append(img);
-      // container.append(div);
       let thumbnail = frame(artRes, hoverBtn);
       thumbnail.classList.add('thumbnail');
       thumbnail.addEventListener('click', (e) => {
-        console.log(e);
+        // Suppress modal if clicking like / close span
         if (e.target.localName === 'span') {
           return;
         }
