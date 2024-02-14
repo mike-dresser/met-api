@@ -53,9 +53,14 @@ div.frame:hover > span {
 }
 
 #thumbnailGrid {
-  /* display: none toggled to flex by JS after search */
-  display: none;
   height: 80vh;
+  display: none;
+}
+
+#gallery,
+#thumbnailGrid {
+  /* display: none toggled to flex by JS after search */
+
   flex-wrap: wrap;
   overflow: auto;
   gap: 20px;
@@ -63,6 +68,12 @@ div.frame:hover > span {
   align-items: flex-end;
 }
 
+#gallery {
+  border: 3px solid black;
+  border-radius: 10px;
+  margin: 5vh;
+  display: none; /* toggle on in JS */
+}
 #thumbnailGrid a {
   font-size: 18px;
   font-style: italic;
@@ -103,13 +114,6 @@ select {
 input#keyword {
   width: 300px;
   height: 36px;
-}
-
-#gallery {
-  border: 3px solid black;
-  border-radius: 10px;
-  margin: 15px;
-  display: none; /* toggle on in JS */
 }
 
 /* Modal Styles */

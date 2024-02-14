@@ -49,21 +49,36 @@ function frame(artObj) {
   let artImg = document.createElement('img');
   artImg.src = artObj.primaryImage;
   artFrame.append(artImg);
-  makeLikable(artFrame);
+  makeLikable(artFrame, artObj.objectID);
   return artFrame;
 }
 
-function makeLikable(container) {
+function makeLikable(container, objectId) {
   // add like and close button to appear over container
   // div contents on hover
   let heart = document.createElement('span');
   heart.textContent = '♥︎';
   heart.classList.add('likeBtn');
+  heart.addEventListener('click', () => {
+    addLike(objectId);
+  });
   // let x = document.createElement('span');
   // x.textContent = `⨉`;
   // x.classList.add('closeBtn');
   // container.append(x, heart);
   container.append(heart);
+}
+
+function addLike(objectId) {
+  // if localStorage.favorites is not set, initialize with empty array
+  const gallery = document.querySelector('#gallery');
+  let currentLikes = localStorage.getItem('favorites')
+    ? localStorage.getItem('favorites')
+    : '[]';
+  let array = JSON.parse(currentLikes);
+  array.push(objectId);
+  createThumbnail(objectId, gallery);
+  localStorage.setItem('favorites', JSON.stringify(array));
 }
 
 function createLabel(artObj) {
@@ -372,8 +387,10 @@ function buildGrid(artList, containerToAppend) {
 
 function createThumbnail(artWork, containerToAppend) {
   // Hide mainArt div
-  const mainArt = document.querySelector('#mainArt');
-  mainArt.style.display = 'none';
+  if (containerToAppend.id === 'thumbnailGrid') {
+    const mainArt = document.querySelector('#mainArt');
+    mainArt.style.display = 'none';
+  }
   //expose thumbnailGrid div
   // let container = document.querySelector('#thumbnailGrid');
   containerToAppend.style.display = 'flex';
