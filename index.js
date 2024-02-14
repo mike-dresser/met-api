@@ -36,7 +36,7 @@ function initialFetch() {
   fetch(`${base_url}${pullRando(landingImg)}`)
     .then((res) => res.json())
     .then((artObj) => {
-      artDiv.append(frame(artObj));
+      artDiv.append(frame(artObj, 'likable'));
       artDiv.append(createLabel(artObj));
     });
 }
@@ -45,20 +45,29 @@ function loadGallery() {
   if (localStorage.getItem('favorites')) {
     let array = JSON.parse(localStorage.getItem('favorites'));
     const gallery = document.querySelector('#gallery');
-    buildGrid(array, gallery);
+    buildGrid(array, gallery, 'closeable');
   }
 }
 
-function frame(artObj) {
+function frame(artObj, hoverBtn) {
   // from object record, return a div containing an image
-  // with like and X buttons on hover
+  // a hover buton options: 'likable' / 'closeable' / 'both'
   let artFrame = document.createElement('div');
   artFrame.className = 'frame';
   let artImg = document.createElement('img');
   artImg.src = artObj.primaryImage;
   artFrame.append(artImg);
-  makeLikable(artFrame, artObj.objectID);
-  makeCloseable(artFrame, artObj.objectID);
+  if (hoverBtn === 'likable') {
+    makeLikable(artFrame, artObj.objectID);
+  }
+  if (hoverBtn === 'closeable') {
+    makeCloseable(artFrame, artObj.objectID);
+  }
+  if (hoverBtn === 'both') {
+    makeLikable(artFrame, artObj.objectID);
+    makeCloseable(artFrame, artObj.objectID);
+  }
+
   return artFrame;
 }
 
@@ -95,7 +104,7 @@ function addLike(objectId) {
     : '[]';
   let array = JSON.parse(currentLikes);
   array.push(objectId);
-  createThumbnail(objectId, gallery);
+  createThumbnail(objectId, gallery, 'closeable');
   localStorage.setItem('favorites', JSON.stringify(array));
 }
 
@@ -384,19 +393,25 @@ function submitSearch(searchURL) {
   fetch(searchURL)
     .then((res) => res.json())
     .then((resultList) => {
-      buildGrid(resultList.objectIDs, document.querySelector('#thumbnailGrid'));
+      buildGrid(
+        resultList.objectIDs,
+        document.querySelector('#thumbnailGrid'),
+        'likable'
+      );
     });
 }
 
-function buildGrid(artList, containerToAppend) {
+function buildGrid(artList, containerToAppend, hoverBtn) {
   // Display up to 18 results, with a link to append the next 18, etc
   // Initially was 50 results, but loading performance was poor
   // This function called for search result or favorites gallery
   if (artList.length < 18) {
-    artList.forEach((artWork) => createThumbnail(artWork, containerToAppend));
+    artList.forEach((artWork) =>
+      createThumbnail(artWork, containerToAppend, hoverBtn)
+    );
   } else {
     for (let i = 0; i < 18; i++) {
-      createThumbnail(artList[i], containerToAppend);
+      createThumbnail(artList[i], containerToAppend, hoverBtn);
     }
     artList.splice(0, 18); // remaining art IDs will be added to 'More' event listener
     let link = document.createElement('a');
@@ -404,7 +419,7 @@ function buildGrid(artList, containerToAppend) {
     link.textContent = 'More...';
     link.addEventListener('click', () => {
       link.remove();
-      buildGrid(artList, containerToAppend);
+      buildGrid(artList, containerToAppend, hoverBtn);
     });
     setTimeout(() => {
       containerToAppend.append(link);
@@ -412,7 +427,9 @@ function buildGrid(artList, containerToAppend) {
   }
 }
 
-function createThumbnail(artWork, containerToAppend) {
+function createThumbnail(artWork, containerToAppend, hoverBtn) {
+  // Takes a single art object, the container to append result, and
+  // a hover buton string: 'likeable' / 'closeable' / 'both'
   // Hide mainArt div
   if (containerToAppend.id === 'thumbnailGrid') {
     const mainArt = document.querySelector('#mainArt');
@@ -431,7 +448,7 @@ function createThumbnail(artWork, containerToAppend) {
       // img.src = artRes.primaryImage;
       // div.append(img);
       // container.append(div);
-      let thumbnail = frame(artRes);
+      let thumbnail = frame(artRes, hoverBtn);
       thumbnail.classList.add('thumbnail');
       thumbnail.addEventListener('click', () => {
         openModal(artRes);
