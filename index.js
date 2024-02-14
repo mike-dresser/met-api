@@ -342,11 +342,11 @@ function submitSearch(searchURL) {
   fetch(searchURL)
     .then((res) => res.json())
     .then((resultList) => {
-      buildGrid(resultList.objectIDs);
+      buildGrid(resultList.objectIDs, clearCont);
     });
 }
 
-function buildGrid(artList) {
+function buildGrid(artList, containerToAppend) {
   // Display up to 18 results, with a link to append the next 18, etc
   // Initially was 50 results, but loading performance was poor
   console.log(artList);
@@ -357,7 +357,6 @@ function buildGrid(artList) {
       createThumbnail(artList[i]);
     }
     artList.splice(0, 18); // remaining art IDs will be added to 'More' event listener
-    let container = document.querySelector('#thumbnailGrid');
     let link = document.createElement('a');
     link.href = '#';
     link.textContent = 'More...';
@@ -366,16 +365,19 @@ function buildGrid(artList) {
       buildGrid(artList);
     });
     setTimeout(() => {
-      container.append(link);
+      containerToAppend.append(link);
     }, 4000); // wait to append link to ensure it is at the end of results
   }
 }
 
-function createThumbnail(artWork) {
+function createThumbnail(artWork, containerToAppend) {
+  // Hide mainArt div
   const mainArt = document.querySelector('#mainArt');
   mainArt.style.display = 'none';
+  //expose thumbnailGrid div
   let container = document.querySelector('#thumbnailGrid');
   container.style.display = 'flex';
+
   fetch(base_url + artWork)
     .then((res) => res.json())
     .then((artRes) => {
