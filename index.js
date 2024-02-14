@@ -41,6 +41,14 @@ function initialFetch() {
     });
 }
 
+function loadGallery() {
+  if (localStorage.getItem('favorites')) {
+    let array = JSON.parse(localStorage.getItem('favorites'));
+    const gallery = document.querySelector('#gallery');
+    buildGrid(array, gallery);
+  }
+}
+
 function frame(artObj) {
   // from object record, return a div containing an image
   // with like and X buttons on hover
@@ -446,3 +454,4 @@ window.addEventListener('click', (event) => {
 
 initialFetch();
 buildSearchForm();
+loadGallery();
