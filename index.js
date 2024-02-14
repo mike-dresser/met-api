@@ -462,7 +462,11 @@ function createThumbnail(artWork, containerToAppend, hoverBtn) {
       // container.append(div);
       let thumbnail = frame(artRes, hoverBtn);
       thumbnail.classList.add('thumbnail');
-      thumbnail.addEventListener('click', () => {
+      thumbnail.addEventListener('click', (e) => {
+        console.log(e);
+        if (e.target.localName === 'span') {
+          return;
+        }
         openModal(artRes);
       });
       containerToAppend.append(thumbnail);
