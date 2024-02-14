@@ -325,13 +325,13 @@ function submitSearch(searchURL) {
 
 function buildGrid(artList) {
   console.log(artList);
-  if (artList.length < 50) {
+  if (artList.length < 18) {
     artList.forEach((artWork) => createThumbnail(artWork));
   } else {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 18; i++) {
       createThumbnail(artList[i]);
     }
-    artList.splice(0, 50); // remaining art IDs will be added to 'More' event listener
+    artList.splice(0, 18); // remaining art IDs will be added to 'More' event listener
     let container = document.querySelector('#thumbnailGrid');
     let link = document.createElement('a');
     link.href = '#';
@@ -342,7 +342,7 @@ function buildGrid(artList) {
     });
     setTimeout(() => {
       container.append(link);
-    }, 5000); // wait to append link to ensure it is at the end of results
+    }, 4000); // wait to append link to ensure it is at the end of results
   }
 }
 
