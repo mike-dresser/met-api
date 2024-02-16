@@ -22,7 +22,11 @@ function initialFetch() {
   ];
   // Clear contents if reloading random image
   let artDiv = document.querySelector('#mainArt');
-  artDiv.innerHTML = '';
+  artDiv.innerHTML = `
+    <div id="logo">
+      <h1><span class="big">M</span>ET</h1>
+      <span class="float">y</span>
+    </div>`;
   // Clear contents if coming from search results
   const clearCont = document.querySelector('#thumbnailGrid');
   clearCont.style.display = 'none';
@@ -36,6 +40,10 @@ function initialFetch() {
   fetch(`${base_url}${pullRando(landingImg)}`)
     .then((res) => res.json())
     .then((artObj) => {
+      // Repeat fetch if returned object has no image (due to rights restrictions)
+      if (!artObj.primaryImage) {
+        initialFetch();
+      }
       artDiv.append(frame(artObj, 'likable'));
       artDiv.append(createLabel(artObj));
     });
