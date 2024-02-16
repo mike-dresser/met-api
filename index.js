@@ -55,7 +55,7 @@ function frame(artObj, hoverBtn) {
   let artFrame = document.createElement('div');
   artFrame.className = 'frame';
   let artImg = document.createElement('img');
-  artImg.src = artObj.primaryImage;
+  artImg.src = artObj.primaryImageSmall;
   artFrame.append(artImg);
   if (hoverBtn === 'likable') {
     makeLikable(artFrame, artObj.objectID);
@@ -435,7 +435,7 @@ function buildGrid(artList, containerToAppend, hoverBtn) {
     });
     setTimeout(() => {
       containerToAppend.append(link);
-    }, 4000); // wait to append link to ensure it is at the end of results
+    }, 3000); // wait to append link to ensure it is at the end of results
   }
 }
 
